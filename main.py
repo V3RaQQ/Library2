@@ -1,16 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for
-import requests
-import json
 from book import Book
 
 
 
 app = Flask(__name__)
 
+books = []
+
 @app.route('/')
 def home():
-    return render_template('index.html')
-
+    return render_template('index.html', books=books)
 
 
 
