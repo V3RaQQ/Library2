@@ -123,30 +123,21 @@
     <p class="lead text-light">Минималистичная тёмная библиотека книг</p>
   </div>
 
-  <!-- Центрированная форма -->
-  <div class="form-wrapper">
-    <div class="form-card">
-      <h5 class="mb-4"><i class="bi bi-plus-circle-fill text-info"></i> Добавить книгу</h5>
-      <form action="{{ url_for('add_book') }}" method="post">
-        <div class="form-floating mb-3">
-          <input type="text" id="name" name="name" class="form-control" placeholder="Название книги" required>
-          <label for="name"><i class="bi bi-journal-text"></i> Название книги</label>
-        </div>
-        <div class="form-floating mb-3">
-          <input type="text" id="author" name="author" class="form-control" placeholder="Автор" required>
-          <label for="author"><i class="bi bi-person-fill"></i> Автор</label>
-        </div>
-        <div class="form-floating mb-4">
-          <input type="text" id="category" name="category" class="form-control" placeholder="Категория" required>
-          <label for="category"><i class="bi bi-tags-fill"></i> Категория</label>
-        </div>
-        <button type="submit" class="btn btn-gradient w-100"><i class="bi bi-save-fill"></i> Сохранить книгу</button>
-      </form>
-    </div>
-  </div>
 
     <!-- Список книг -->
     <div class="library-section">
+        <form action="/">
+            {% if categories %}
+                <h5 class="mb-4 text-center"><i class="bi bi-tags-fill"></i> Категории</h5>
+                <select name='find_category' class="form-select mb-3" aria-label="Default select example">
+                    <option value="null" selected>All books</option>
+                    {% for category in categories %}
+                            <option value="{{ category }}">{{ category }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-gradient w-100"><i class="bi bi-search"></i> Найти книги</button>    
+        {% endif %}
+        </form>
         <h5 class="mb-4 text-center"><i class="bi bi-bookmarks-fill"></i> Моя библиотека</h5>
         {% if books %}
         <div class="d-flex flex-wrap justify-content-center gap-4">
