@@ -137,7 +137,14 @@
           <label for="author"><i class="bi bi-person-fill"></i> Автор</label>
         </div>
         <div class="form-floating mb-4">
-          <input type="text" id="category" name="category" class="form-control" placeholder="Категория" required>
+            <select name="category" id="category" class="form-select" aria-label="Default select example">
+                <option value="null" selected>Выберите категорию</option>
+                {% for book in books %}
+                    <option value="{{ category }}">{{ book.category }}</option>
+                {% endfor %}
+            </select>
+          <!-- <input type="text" id="category" name="category" class="form-control" placeholder="Категория" required> -->
+        
           <label for="category"><i class="bi bi-tags-fill"></i> Категория</label>
         </div>
         <button type="submit" class="btn btn-gradient w-100"><i class="bi bi-save-fill"></i> Сохранить книгу</button>
