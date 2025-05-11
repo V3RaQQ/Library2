@@ -5,9 +5,10 @@ from book import Book
 
 app = Flask(__name__)
 
-books = [Book("The Great Gatsby", "F. Scott Fitzgerald", "Fiction"),
-        Book("To Kill a Mockingbird", "Harper Lee", "Fiction"),
-        Book("1984", "George Orwell", "Dystopian")]
+books = [Book("Book1", "Author1", "Fiction"), 
+         Book("Book2", "Author2", "Non-Fiction"),
+         Book("Book3", "Author3", "Science"),
+         Book("Book4", "Author4", "History")]
 
 @app.route('/')
 def home():
@@ -37,7 +38,30 @@ def remove(name):
     print('not finded')
     return redirect(url_for('home'))
 
+@app.route('/edit_book')
+def edit_book():
+    name = request.args.get('book_name')
+    print(name)
+    editing_book = None
+    for book in books:
+        if book.name == name:
+            editing_book = book
+    return render_template('edit_book.html', book=editing_book)
 
+@app.route('/edit', methods=['POST'])
+def edit():
+    old_name = request.form['old_name']
+    name = request.form['name']
+    author = request.form['author']
+    category = request.form['category']
+    for book in books:
+        if book.name == old_name:
+            book.name = name
+            book.author = author
+            book.category = category
+            return render_template('index.html', books=books)
+    print('error')
+    return render_template('index.html', books=books)
 
 if __name__ == "__main__":
     app.run(debug=True)

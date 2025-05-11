@@ -184,6 +184,10 @@
                 <a href="/remove/{{book.name}}">
                   <button type="submit" class="btn-remove w-100"><i class="bi bi-trash-fill"></i> Remove</button>
                 </a>                
+                <form action="/edit_book">
+                    <input name="book_name" value="{{book.name}}" hidden/>
+                    <button type="submit">Edit</button>
+                </form>
             </div>
             {% endfor %}
         </div>
