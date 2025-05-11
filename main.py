@@ -12,6 +12,9 @@ books = [Book("Book1", "Author1", "Fiction"),
 
 @app.route('/')
 def home():
+    if request.args.get('search_name'):
+        name = request.args.get('search_name')
+        return render_template('index.html', books=[book for book in books if book.name == name])
     return render_template('index.html', books=books)
 
 @app.route('/add_book', methods=['POST'])
