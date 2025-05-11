@@ -213,6 +213,18 @@
 
     <!-- Список книг -->
     <div class="library-section">
+        <form action="/">
+            {% if categories %}
+                <h5 class="mb-4 text-center"><i class="bi bi-tags-fill"></i> Категории</h5>
+                <select name='find_category' class="form-select mb-3" aria-label="Default select example">
+                    <option value="null" selected>All books</option>
+                    {% for category in categories %}
+                            <option value="{{ category }}">{{ category }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-gradient w-100"><i class="bi bi-search"></i> Найти книги</button>    
+        {% endif %}
+        </form>
         <h5 class="mb-4 text-center"><i class="bi bi-bookmarks-fill"></i> Моя библиотека</h5>
         <form action="/" class="search-container">
         <input type="text" name="search_name" class="search-input" placeholder="Введите название книги"/>
