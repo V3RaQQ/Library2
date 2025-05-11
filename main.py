@@ -26,6 +26,16 @@ def add_book():
 
 #remove branch
 
+@app.route("/remove/<name>")
+def remove(name):
+    if name in [book.name for book in books]:
+        for book in books:
+            if book.name == name:
+                books.remove(book)
+                print(f'removed book {book.name}')
+                return redirect(url_for('home'))
+    print('not finded')
+    return redirect(url_for('home'))
 
 
 
